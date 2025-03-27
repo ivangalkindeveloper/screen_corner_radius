@@ -1,0 +1,26 @@
+name: screen_corner_radius
+description: Screen Corner Radius plugin.
+version: 1.0.0
+repository: https://github.com/ivangalkindeveloper/screen_corner_radius
+
+environment:
+  sdk: ^3.7.0
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.screen_corner_radius
+        pluginClass: ScreenCornerRadiusPlugin
+      ios:
+        pluginClass: ScreenCornerRadiusPlugin
