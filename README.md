@@ -14,6 +14,8 @@ Works for iOS and Android.
   <a href="https://www.buymeacoffee.com/ivangalkin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="32px" width= "128px"></a>
 </div>
 
+![Demo](asset/demo.png)
+
 ## Usage
 1) Import the package:
 ```dart
@@ -23,8 +25,7 @@ import 'package:screen_corner_radius/screen_corner_radius.dart';
 ```dart
 final BorderRadius screenRadius = await ScreenCornerRadius.get();
 ```
-The return value is BorderRadius, which can be used immediately in the widget layout.
-If the radius could not be determined, the return value will be BorderRadius.zero.
+The return value is data class ScreenRadius, which can be used immediately in the widget layout.
 
 ## Acknowledgments
 The problem was mostly that such a plugin had not been released to Pub yet.

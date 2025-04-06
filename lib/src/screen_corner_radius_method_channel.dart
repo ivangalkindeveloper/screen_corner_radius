@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:screen_corner_radius/src/screen_radius.dart';
 
 import 'screen_corner_radius_platform_interface.dart';
 
@@ -10,20 +11,20 @@ class MethodChannelScreenCornerRadius extends ScreenCornerRadiusPlatform {
   final methodChannel = const MethodChannel('screen_corner_radius');
 
   @override
-  Future<BorderRadius> getScreenCornerRadius() async {
+  Future<ScreenRadius> getScreenCornerRadius() async {
     final Map<String, double>? result =
         (await methodChannel.invokeMethod<Map>(
           'getScreenCornerRadius',
         ))?.cast<String, double>();
     if (result == null) {
-      return BorderRadius.zero;
+      return ScreenRadius.zero();
     }
 
-    return BorderRadius.only(
-      topLeft: Radius.circular(result["topLeft"] ?? 0),
-      topRight: Radius.circular(result["topRight"] ?? 0),
-      bottomLeft: Radius.circular(result["bottomLeft"] ?? 0),
-      bottomRight: Radius.circular(result["bottomRight"] ?? 0),
+    return ScreenRadius(
+      topLeft: result["topLeft"] ?? 0,
+      topRight: result["topRight"] ?? 0,
+      bottomLeft: result["bottomLeft"] ?? 0,
+      bottomRight: result["bottomRight"] ?? 0,
     );
   }
 }

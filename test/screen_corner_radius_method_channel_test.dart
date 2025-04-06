@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:screen_corner_radius/screen_corner_radius.dart';
 import 'package:screen_corner_radius/src/screen_corner_radius_method_channel.dart';
 
 void main() {
@@ -28,6 +28,6 @@ void main() {
   });
 
   test('getScreenCornerRadius', () async {
-    expect(await platform.getScreenCornerRadius(), BorderRadius.circular(62));
+    expect(await platform.getScreenCornerRadius(), ScreenRadius.value(62));
   });
 }

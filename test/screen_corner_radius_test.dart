@@ -1,16 +1,15 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:screen_corner_radius/src/screen_corner_radius.dart';
 import 'package:screen_corner_radius/src/screen_corner_radius_platform_interface.dart';
 import 'package:screen_corner_radius/src/screen_corner_radius_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:screen_corner_radius/src/screen_radius.dart';
 
 class MockScreenCornerRadiusPlatform
     with MockPlatformInterfaceMixin
     implements ScreenCornerRadiusPlatform {
   @override
-  Future<BorderRadius> getScreenCornerRadius() async =>
-      BorderRadius.circular(62);
+  Future<ScreenRadius> getScreenCornerRadius() async => ScreenRadius.value(62);
 }
 
 void main() {
@@ -26,6 +25,6 @@ void main() {
         MockScreenCornerRadiusPlatform();
     ScreenCornerRadiusPlatform.instance = fakePlatform;
 
-    expect(await ScreenCornerRadius.get(), BorderRadius.circular(62));
+    expect(await ScreenCornerRadius.get(), ScreenRadius.value(62));
   });
 }

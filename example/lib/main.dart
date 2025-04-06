@@ -12,30 +12,70 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: FutureBuilder(
-          future: ScreenCornerRadius.get(),
-          builder: (context, snapshot) {
-            final data = snapshot.data;
-            if (data == null) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        body: SafeArea(
+          child: FutureBuilder(
+            future: ScreenCornerRadius.get(),
+            builder: (context, snapshot) {
+              final data = snapshot.data;
+              if (data == null) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: data,
-                ),
-                child: Center(
-                  child: Text(
-                    'Screen radius:\n$data',
-                    textAlign: TextAlign.center,
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(data.topLeft),
+                      topRight: Radius.circular(data.topRight),
+                      bottomLeft: Radius.circular(data.bottomLeft),
+                      bottomRight: Radius.circular(data.bottomRight),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(32),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            data.topLeft.toStringAsFixed(2).toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            data.topRight.toStringAsFixed(2).toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            data.bottomLeft.toStringAsFixed(2).toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            data.bottomRight.toStringAsFixed(2).toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

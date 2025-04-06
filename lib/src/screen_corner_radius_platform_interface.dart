@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:screen_corner_radius/src/screen_radius.dart';
 
 import 'screen_corner_radius_method_channel.dart';
 
@@ -25,7 +25,7 @@ abstract class ScreenCornerRadiusPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<BorderRadius> getScreenCornerRadius() =>
+  Future<ScreenRadius> getScreenCornerRadius() =>
       throw UnimplementedError(
         'getScreenCornerRadius() has not been implemented.',
       );
