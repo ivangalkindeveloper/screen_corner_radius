@@ -20,19 +20,19 @@ public class ScreenCornerRadiusPlugin: NSObject, FlutterPlugin {
 
 extension UIScreen {
     public var displayCornerRadius: [String: CGFloat]? {
-        if #available(iOS 11.0, *) {
-            guard let cornerRadius = self.value(forKey:"_displayCornerRadius") as? CGFloat else {
-                return nil
-            }
-
-            return [
-              "topLeft": cornerRadius,
-              "topRight": cornerRadius,
-              "bottomLeft": cornerRadius,
-              "bottomRight": cornerRadius,
-            ]
+        if #unavailable(iOS 11.0) {
+            return nil
         }
-        
-        return nil
+
+        guard let cornerRadius = self.value(forKey:"_displayCornerRadius") as? CGFloat else {
+            return nil
+        }
+
+        return [
+          "topLeft": cornerRadius,
+          "topRight": cornerRadius,
+          "bottomLeft": cornerRadius,
+          "bottomRight": cornerRadius,
+        ]
      }
 }

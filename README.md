@@ -23,9 +23,15 @@ import 'package:screen_corner_radius/screen_corner_radius.dart';
 ```
 2) Use the method:
 ```dart
-final BorderRadius screenRadius = await ScreenCornerRadius.get();
+final ScreenRadius? screenRadius = await ScreenCornerRadius.get();
 ```
 The return value is data class ScreenRadius, which can be used immediately in the widget layout.
+
+## Android
+The rounded corners [API](https://developer.android.com/about/versions/12/features?hl=ru#rounded_corner_apis) with the [getRoundedCorner](https://developer.android.com/reference/android/view/WindowInsets?hl=en#getRoundedCorner(int)) method is used to determine screen radii.
+
+## iOS
+The [UIScreen](https://developer.apple.com/documentation/uikit/uiscreen) object extension with the _displayCornerRadius key parameter is used to determine screen radius.
 
 ## Acknowledgments
 The problem was mostly that such a plugin had not been released to Pub yet.

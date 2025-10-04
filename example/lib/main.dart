@@ -16,9 +16,13 @@ class MyApp extends StatelessWidget {
           child: FutureBuilder(
             future: ScreenCornerRadius.get(),
             builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
               final data = snapshot.data;
               if (data == null) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: Text('No data'));
               }
 
               return Padding(

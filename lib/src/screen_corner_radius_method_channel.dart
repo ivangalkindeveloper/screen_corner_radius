@@ -11,13 +11,12 @@ class MethodChannelScreenCornerRadius extends ScreenCornerRadiusPlatform {
   final methodChannel = const MethodChannel('screen_corner_radius');
 
   @override
-  Future<ScreenRadius> getScreenCornerRadius() async {
-    final Map<String, double>? result =
-        (await methodChannel.invokeMethod<Map>(
-          'getScreenCornerRadius',
-        ))?.cast<String, double>();
+  Future<ScreenRadius?> getScreenCornerRadius() async {
+    final Map<String, double>? result = (await methodChannel.invokeMethod<Map>(
+      'getScreenCornerRadius',
+    ))?.cast<String, double>();
     if (result == null) {
-      return ScreenRadius.zero();
+      return null;
     }
 
     return ScreenRadius(

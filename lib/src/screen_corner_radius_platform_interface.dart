@@ -25,8 +25,7 @@ abstract class ScreenCornerRadiusPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<ScreenRadius> getScreenCornerRadius() =>
-      throw UnimplementedError(
-        'getScreenCornerRadius() has not been implemented.',
-      );
+  Future<ScreenRadius?> getScreenCornerRadius() => throw UnimplementedError(
+    'getScreenCornerRadius() has not been implemented.',
+  );
 }

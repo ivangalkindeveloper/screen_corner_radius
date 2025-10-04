@@ -1,4 +1,4 @@
-package com.example.screen_corner_radius
+package com.ivangalkindev.screen_corner_radius
 
 import android.app.Activity
 import android.content.Context
@@ -34,27 +34,35 @@ class ScreenCornerRadiusPlugin: FlutterPlugin, MethodCallHandler, ActivityAware 
   }
 
   override fun onMethodCall(call: MethodCall, result: Result) {
-    if (call.method == "getScreenCornerRadius") {
-      val view = activity.window.decorView.rootView
-      val cornerRadius = getCornerRadius(view)
-      result.success(cornerRadius)
-    } else {
-      result.notImplemented()
+    when (call.method) {
+      "getScreenCornerRadius" -> {
+        val view = activity.window.decorView.rootView
+        val cornerRadius = getCornerRadius(view)
+        result.success(cornerRadius)
+      }
+      else -> result.notImplemented()
     }
   }
 
-  private fun getCornerRadius(view: View): Map<String, Any>? {
-    val density = this.activity.resources.displayMetrics.density.toDouble()
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || density == 0.0) {
+  private fun getCornerRadius(view: View): Map<String, Double?>? {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
       return null
     }
-   
+
+    val density = this.activity.resources.displayMetrics.density.toDouble()
+    if (density == 0.0) {
+      return null
+    }
 
     val insets = view.rootWindowInsets
-    val topLeft = (insets?.getRoundedCorner(RoundedCorner.POSITION_TOP_LEFT)?.radius ?: 0f).toDouble()
-    val topRight = (insets?.getRoundedCorner(RoundedCorner.POSITION_TOP_RIGHT)?.radius ?: 0f).toDouble()
-    val bottomLeft = (insets?.getRoundedCorner(RoundedCorner.POSITION_BOTTOM_LEFT)?.radius ?: 0f).toDouble()
-    val bottomRight = (insets?.getRoundedCorner(RoundedCorner.POSITION_BOTTOM_RIGHT)?.radius ?: 0f).toDouble()
+    val topLeft = insets?.getRoundedCorner(RoundedCorner.POSITION_TOP_LEFT)?.radius?.toDouble()
+    val topRight = insets?.getRoundedCorner(RoundedCorner.POSITION_TOP_RIGHT)?.radius?.toDouble()
+    val bottomLeft = insets?.getRoundedCorner(RoundedCorner.POSITION_BOTTOM_LEFT)?.radius?.toDouble()
+    val bottomRight = insets?.getRoundedCorner(RoundedCorner.POSITION_BOTTOM_RIGHT)?.radius?.toDouble()
+    if (topLeft == null || topRight == null || bottomLeft == null || bottomRight == null) {
+      return null
+    }
+
     return mapOf(
       "topLeft" to topLeft / density,
       "topRight" to topRight / density,

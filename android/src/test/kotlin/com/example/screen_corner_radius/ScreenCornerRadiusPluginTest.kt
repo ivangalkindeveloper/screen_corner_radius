@@ -1,4 +1,4 @@
-package com.example.screen_corner_radius
+package com.ivangalkindev.screen_corner_radius
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
